@@ -1,0 +1,12 @@
+# Default values for the application
+replicaCount: 3  # Number of replicas
+
+# Image configuration for the application
+image:
+  repository: <your-docker-image>  # Replace with your actual Docker image name
+  tag: latest  # Default image tag
+
+# Ingress configuration
+ingress:
+  enabled: true
+  host: nodejs.local  # Custom hostname for external exposure
