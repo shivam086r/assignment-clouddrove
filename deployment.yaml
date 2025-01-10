@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nodejs-demo-app.fullname" . }}
+  labels:
+    app: {{ include "nodejs-demo-app.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}  # Reference replicaCount from values.yaml
+  selector:
+    matchLabels:
+      app: {{ include "nodejs-demo-app.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "nodejs-demo-app.name" . }}
+    spec:
+      containers:
+        - name: nodejs-demo-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"  # Reference image.repository and image.tag
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
