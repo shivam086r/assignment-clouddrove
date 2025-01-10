@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-demo-app
+  labels:
+    app: nodejs-demo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodejs-demo-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-demo-app
+    spec:
+      containers:
+        - name: nodejs-demo-app
+          image: <your-docker-image>  # Replace with your actual Docker image (e.g., <your-registry>/nodejs-demo-app:latest)
+          ports:
+            - containerPort: 5000
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
